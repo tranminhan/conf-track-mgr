@@ -80,7 +80,7 @@ public class NaiveConferenceScheduler implements IConferenceScheduler
             sessions.add(afternoonSession);
         }
         
-        return new Track(Integer.toString(trackId), sessions.toArray(new ISession[0]));
+        return new Track(Integer.toString(trackId), morningSession, afternoonSession);
     }
     
     ISession assignTalksToSession(List<ITalk> proposalTalks, int timeAllocationInMinutes, LocalTime sessionStartTime)

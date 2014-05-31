@@ -5,18 +5,18 @@ import java.time.LocalTime;
 public class TalkDetail
 {
     
-    private final LocalTime start;
+    private final LocalTime startTime;
     private final String title;
     
-    public TalkDetail(LocalTime start, String title)
+    public TalkDetail(LocalTime startTime, String title)
     {
-        this.start = start;
+        this.startTime = startTime;
         this.title = title;
     }
     
-    public LocalTime start()
+    public LocalTime startTime()
     {
-        return start;
+        return startTime;
     }
     
     public String title()

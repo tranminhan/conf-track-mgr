@@ -51,4 +51,9 @@ public class Session implements ISession
         return endTime;
     }
     
+    public boolean hasTalks()
+    {
+        return talkDetails().length > 0;
+    }
+    
 }

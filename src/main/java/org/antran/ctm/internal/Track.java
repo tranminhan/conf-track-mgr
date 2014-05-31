@@ -7,29 +7,30 @@ import org.antran.ctm.api.ITrack;
 
 public class Track implements ITrack
 {
-    
-    private ISession[] sessions;
     private String id;
+    private ISession morningSession;
+    private ISession afternoonSession;
     
     private Track()
     {
     }
     
-    public Track(String id, ISession[] sessions)
+    public Track(String id, ISession morningSession, ISession afternoonSession)
     {
         this();
         this.id = id;
-        this.sessions = sessions.clone();
+        this.morningSession = morningSession;
+        this.afternoonSession = afternoonSession;
     }
     
     public int numberOfSessionWithTalks()
     {
         int result = 0;
-        if (sessions[0].talkDetails().length > 0)
+        if (morningSession().hasTalks())
         {
             result++;
         }
-        if (sessions[1].talkDetails().length > 0)
+        if (afternoonSession().hasTalks())
         {
             result++;
         }
@@ -43,12 +44,12 @@ public class Track implements ITrack
     
     public ISession afternoonSession()
     {
-        return sessions[1];
+        return afternoonSession;
     }
     
     public ISession morningSession()
     {
-        return sessions[0];
+        return morningSession;
     }
     
     public LocalTime networkingStartTime()

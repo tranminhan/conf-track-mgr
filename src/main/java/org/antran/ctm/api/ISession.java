@@ -8,4 +8,6 @@ public interface ISession extends Iterable<ITalk>
     TalkDetail[] talkDetails();
     
     LocalTime endTime();
+
+    boolean hasTalks();
 }

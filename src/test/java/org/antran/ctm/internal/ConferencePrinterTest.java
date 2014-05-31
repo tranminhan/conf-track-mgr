@@ -44,8 +44,7 @@ public class ConferencePrinterTest
         ISession afternoonSession = new Session(TimeUtils.AFTERNOON_START,
                 TalkBuilder.from(afternoonTalks));
         
-        ITrack track = new Track("1", new ISession[] { morningSession,
-                afternoonSession });
+        ITrack track = new Track("1", morningSession, afternoonSession);
         
         // when
         String flyoutContent = printer.print(track);
@@ -62,22 +61,22 @@ public class ConferencePrinterTest
     {
         // given
         List<ITrack> tracks = Arrays.asList(new ITrack[] {
-                new Track("1", new ISession[] {
+                new Track("1",
                         new Session(TimeUtils.MORNING_START, new ITalk[] {
                                 new Talk("talk 1", 10)
                         }),
                         new Session(TimeUtils.AFTERNOON_START, new ITalk[] {
                                 new Talk("talk 2", 15)
                         })
-                }),
-                new Track("2", new ISession[] {
+                ),
+                new Track("2",
                         new Session(TimeUtils.MORNING_START, new ITalk[] {
                                 new Talk("talk 3", 10)
                         }),
                         new Session(TimeUtils.AFTERNOON_START, new ITalk[] {
                                 new Talk("talk 4", 15)
                         })
-                })
+                )
         
         });
         IConference conference = new Conference(tracks);

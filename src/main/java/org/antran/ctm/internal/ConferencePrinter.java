@@ -44,7 +44,7 @@ public class ConferencePrinter implements IConferencePrinter
     public String print(TalkDetail talkDetail)
     {
         StringBuilder content = new StringBuilder();
-        content.append(dateTimeFormatter.format(talkDetail.start()) + " " + talkDetail.title());
+        content.append(dateTimeFormatter.format(talkDetail.startTime()) + " " + talkDetail.title());
         return content.toString();
     }
     
