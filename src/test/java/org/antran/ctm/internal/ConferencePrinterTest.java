@@ -8,6 +8,7 @@ import org.antran.ctm.api.ISession;
 import org.antran.ctm.api.ITrack;
 import org.antran.ctm.api.IConferencePrinter;
 import org.antran.ctm.api.TalkDetail;
+import org.junit.Before;
 import org.junit.Test;
 
 public class ConferencePrinterTest
@@ -21,6 +22,14 @@ public class ConferencePrinterTest
             "Writing Fast Tests Against Enterprise Rails 180min",
             "Rails for Python Developers lightning",
             "Overdoing it in Python 45min", };
+    
+    IConferencePrinter printer;
+    
+    @Before
+    public void setup()
+    {
+        printer = new ConferencePrinter();
+    }
     
     @Test
     public void shouldPrintText()
@@ -36,7 +45,6 @@ public class ConferencePrinterTest
                 afternoonSession });
         
         // when
-        IConferencePrinter printer = new ConferencePrinter();
         String flyoutContent = printer.print(track);
         
         // then
@@ -50,11 +58,13 @@ public class ConferencePrinterTest
     @Test
     public void shouldPrintTalkDetail()
     {
+        // given
         TalkDetail talkDetail = new TalkDetail(TimeUtils.MORNING_START, "a title");
-        IConferencePrinter printer = new ConferencePrinter();
         
+        // when
         String flyoutContent = printer.print(talkDetail);
         
+        // then
         assertTrue(flyoutContent.contains("09:00AM a title"));
     }
     

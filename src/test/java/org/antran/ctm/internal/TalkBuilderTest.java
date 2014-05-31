@@ -1,12 +1,10 @@
 package org.antran.ctm.internal;
 
-import static org.junit.Assert.*;
-
-import java.util.List;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import org.antran.ctm.api.ITalk;
-import org.antran.ctm.internal.Talk;
-import org.antran.ctm.internal.TalkBuilder;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 

@@ -1,13 +1,13 @@
 package org.antran.ctm.internal;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import org.antran.ctm.api.IConference;
+import org.antran.ctm.api.IConferencePrinter;
 import org.antran.ctm.api.IConferenceScheduler;
 import org.antran.ctm.api.ITrack;
-import org.antran.ctm.api.IConferencePrinter;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class ConferenceScheduleTest
@@ -19,19 +19,19 @@ public class ConferenceScheduleTest
             "Writing Fast Tests Against Enterprise Rails 60min",
             "Rails for Python Developers lightning" };
     
-    IConferenceScheduler confScheduler;
+    IConferenceScheduler conferenceScheduler;
     
     @Before
     public void setup()
     {
-        confScheduler = new NaiveConferenceScheduler();
+        conferenceScheduler = new NaiveConferenceScheduler();
     }
     
     @Test
     public void shouldCreateConfFromNoProposal()
     {
         // when
-        IConference conference = confScheduler.schedule(NO_PROPOSAL);
+        IConference conference = conferenceScheduler.schedule(NO_PROPOSAL);
         
         // then
         assertNotNull(conference);
@@ -45,7 +45,7 @@ public class ConferenceScheduleTest
     public void shouldCreateConfFromOneProposal()
     {
         // when
-        IConference conference = confScheduler.schedule(ONE_PROPOSAL);
+        IConference conference = conferenceScheduler.schedule(ONE_PROPOSAL);
         
         // then
         assertNotNull(conference);
@@ -66,7 +66,7 @@ public class ConferenceScheduleTest
     public void shouldCreateConfWithOneTrackAndTwoSessions()
     {
         // when
-        IConference conference = confScheduler
+        IConference conference = conferenceScheduler
                 .schedule(ONE_TRACK_TWO_SESSIONS_PROPOSALS);
         
         // then
@@ -88,7 +88,7 @@ public class ConferenceScheduleTest
     public void shouldCreateConfWithTwoTracks()
     {
         // when
-        IConference conference = confScheduler.schedule(TWO_TRACK_PROPOSALS);
+        IConference conference = conferenceScheduler.schedule(TWO_TRACK_PROPOSALS);
         
         // then
         assertNotNull(conference);
@@ -129,7 +129,7 @@ public class ConferenceScheduleTest
     public void shouldCreateConfWithSampleProposals()
     {
         // when
-        IConference conference = confScheduler.schedule(SAMPLE_PROPOSALS);
+        IConference conference = conferenceScheduler.schedule(SAMPLE_PROPOSALS);
         
         // then
         assertNotNull(conference);

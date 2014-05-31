@@ -8,6 +8,7 @@ import java.util.List;
 import org.antran.ctm.api.ISession;
 import org.antran.ctm.api.ITalk;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.junit.Before;
 import org.junit.Test;
 
 public class ConferenceScheduleTest_Internal
@@ -17,18 +18,27 @@ public class ConferenceScheduleTest_Internal
             "Rails for Python Developers 120min",
             "Rails for Python Developers 10min" };
     
-    NaiveConferenceScheduler conferenceSchedule = new NaiveConferenceScheduler();
+    NaiveConferenceScheduler conferenceSchedule;
     private static final int MORNING_TIME_ALLOCATION = 60 * 3;
+    
+    @Before
+    public void setup()
+    {
+        conferenceSchedule = new NaiveConferenceScheduler();
+    }
     
     @Test
     public void shouldAssignToMorningSession()
     {
+        // given
         List<ITalk> proposalTalks = Arrays.asList(TalkBuilder
                 .from(TWO_PROPOSALS));
         
+        // when
         ISession morningSession = conferenceSchedule.assignTalksToSession(
                 proposalTalks, MORNING_TIME_ALLOCATION, TimeUtils.MORNING_START);
         
+        // then
         assertNotNull(morningSession);
         assertOneTalksLeft(proposalTalks);
     }
