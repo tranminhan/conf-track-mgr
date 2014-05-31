@@ -25,11 +25,6 @@ public class Conference implements IConference
         this.tracks.addAll(tracks);
     }
     
-    public int numberOfTracks()
-    {
-        return tracks.size();
-    }
-    
     public ITrack[] tracks()
     {
         return tracks.toArray(new ITrack[0]);

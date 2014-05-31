@@ -31,8 +31,9 @@ public class ConferenceScheduleTest
         
         // then
         assertNotNull(conference);
-        assertEquals(0, conference.numberOfTracks());
         assertNotNull(conference.tracks());
+        assertEquals(0, conference.tracks().length);
+        
     }
     
     static final String[] ONE_PROPOSAL = { "Rails for Python Developers lightning" };
@@ -45,8 +46,8 @@ public class ConferenceScheduleTest
         
         // then
         assertNotNull(conference);
-        assertEquals(1, conference.numberOfTracks());
         assertNotNull(conference.tracks());
+        assertEquals(1, conference.tracks().length);
         
         ITrack track = conference.track(0);
         assertNotNull(track);
@@ -65,8 +66,8 @@ public class ConferenceScheduleTest
         
         // then
         assertNotNull(conference);
-        assertEquals(1, conference.numberOfTracks());
         assertNotNull(conference.tracks());
+        assertEquals(1, conference.tracks().length);
         
         ITrack track = conference.track(0);
         assertNotNull(track);
@@ -90,8 +91,8 @@ public class ConferenceScheduleTest
         
         // then
         assertNotNull(conference);
-        assertEquals(1, conference.numberOfTracks());
         assertNotNull(conference.tracks());
+        assertEquals(1, conference.tracks().length);
         
         ITrack track = conference.track(0);
         assertNotNull(track);
@@ -115,8 +116,8 @@ public class ConferenceScheduleTest
         
         // then
         assertNotNull(conference);
-        assertEquals(2, conference.numberOfTracks());
         assertNotNull(conference.tracks());
+        assertEquals(2, conference.tracks().length);
         
         ITrack track = conference.track(0);
         assertNotNull(track);
@@ -156,8 +157,8 @@ public class ConferenceScheduleTest
         
         // then
         assertNotNull(conference);
-        assertEquals(2, conference.numberOfTracks());
         assertNotNull(conference.tracks());
+        assertEquals(2, conference.tracks().length);
         
         ITrack track = conference.track(0);
         assertNotNull(track);
@@ -193,8 +194,8 @@ public class ConferenceScheduleTest
         
         // then
         assertNotNull(conference);
-        assertEquals(1, conference.numberOfTracks());
         assertNotNull(conference.tracks());
+        assertEquals(1, conference.tracks().length);
         
         ITrack track = conference.track(0);
         assertNotNull(track);
