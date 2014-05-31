@@ -1,5 +1,6 @@
 package org.antran.ctm.api;
 
+
 public interface IConferencePrinter
 {
     
@@ -7,6 +8,6 @@ public interface IConferencePrinter
     
     String print(ITrack track);
     
-    String print(ITalkDetail talkDetail);
+    String print(TalkDetail talkDetail);
     
 }

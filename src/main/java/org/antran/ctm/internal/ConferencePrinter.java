@@ -3,10 +3,10 @@ package org.antran.ctm.internal;
 import java.time.format.DateTimeFormatter;
 
 import org.antran.ctm.api.IConference;
-import org.antran.ctm.api.ISession;
-import org.antran.ctm.api.ITalkDetail;
-import org.antran.ctm.api.ITrack;
 import org.antran.ctm.api.IConferencePrinter;
+import org.antran.ctm.api.ISession;
+import org.antran.ctm.api.ITrack;
+import org.antran.ctm.api.TalkDetail;
 
 public class ConferencePrinter implements IConferencePrinter
 {
@@ -34,15 +34,15 @@ public class ConferencePrinter implements IConferencePrinter
     
     private void printSession(StringBuilder content, ISession morningSession)
     {
-        ITalkDetail[] talkDetails = morningSession.getTalkDetails();
-        for (ITalkDetail talkDetail : talkDetails)
+        TalkDetail[] talkDetails = morningSession.getTalkDetails();
+        for (TalkDetail talkDetail : talkDetails)
         {
             content.append(this.print(talkDetail));
             content.append("\n");
         }
     }
     
-    public String print(ITalkDetail talkDetail)
+    public String print(TalkDetail talkDetail)
     {
         StringBuilder content = new StringBuilder();
         content.append(dateTimeFormatter.format(talkDetail.start()) + " "
