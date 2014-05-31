@@ -38,10 +38,10 @@ public class ConferencePrinterTest
     public void shouldPrintTextForTrack()
     {
         // given
-        ISession morningSession = new Session(TimeUtils.MORNING_START,
+        ISession morningSession = new Session(ITrack.MORNING_START_9_AM,
                 TalkBuilder.from(morningTalks));
         
-        ISession afternoonSession = new Session(TimeUtils.AFTERNOON_START,
+        ISession afternoonSession = new Session(ITrack.AFTERNOON_START_1_PM,
                 TalkBuilder.from(afternoonTalks));
         
         ITrack track = new Track("1", morningSession, afternoonSession);
@@ -62,18 +62,18 @@ public class ConferencePrinterTest
         // given
         List<ITrack> tracks = Arrays.asList(new ITrack[] {
                 new Track("1",
-                        new Session(TimeUtils.MORNING_START, new ITalk[] {
+                        new Session(ITrack.MORNING_START_9_AM, new ITalk[] {
                                 new Talk("talk 1", 10)
                         }),
-                        new Session(TimeUtils.AFTERNOON_START, new ITalk[] {
+                        new Session(ITrack.AFTERNOON_START_1_PM, new ITalk[] {
                                 new Talk("talk 2", 15)
                         })
                 ),
                 new Track("2",
-                        new Session(TimeUtils.MORNING_START, new ITalk[] {
+                        new Session(ITrack.MORNING_START_9_AM, new ITalk[] {
                                 new Talk("talk 3", 10)
                         }),
-                        new Session(TimeUtils.AFTERNOON_START, new ITalk[] {
+                        new Session(ITrack.AFTERNOON_START_1_PM, new ITalk[] {
                                 new Talk("talk 4", 15)
                         })
                 )
@@ -95,7 +95,7 @@ public class ConferencePrinterTest
     public void shouldPrintTalkDetail()
     {
         // given
-        TalkDetail talkDetail = new TalkDetail(TimeUtils.MORNING_START, "a title");
+        TalkDetail talkDetail = new TalkDetail(ITrack.MORNING_START_9_AM, "a title");
         
         // when
         String flyoutContent = printer.print(talkDetail);

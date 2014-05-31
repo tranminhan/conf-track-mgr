@@ -19,7 +19,7 @@ public class ConferencePrinter implements IConferencePrinter
         content.append(ENDLINE);
         
         printSession(content, track.morningSession());
-        content.append(dateTimeFormatter.format(ITrack.LUNCH_TIME) + " " + "Lunch");
+        content.append(dateTimeFormatter.format(ITrack.LUNCH_TIME_12_PM) + " " + "Lunch");
         content.append(ENDLINE);
         
         printSession(content, track.afternoonSession());
@@ -50,13 +50,13 @@ public class ConferencePrinter implements IConferencePrinter
     
     public String print(IConference conference)
     {
-        StringBuilder content = new StringBuilder();
+        StringBuilder flyoutContent = new StringBuilder();
         for (ITrack track : conference.tracks())
         {
-            content.append(this.print(track));
-            content.append(ENDLINE);
+            flyoutContent.append(this.print(track));
+            flyoutContent.append(ENDLINE);
         }
-        return content.toString();
+        return flyoutContent.toString();
     }
     
 }

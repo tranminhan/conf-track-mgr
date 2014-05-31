@@ -1,11 +1,10 @@
 package org.antran.ctm.internal;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import org.antran.ctm.api.IConference;
 import org.antran.ctm.api.IConferencePrinter;
 import org.antran.ctm.api.IConferenceScheduler;
-import org.antran.ctm.api.ITrack;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -13,9 +13,11 @@ import org.antran.ctm.api.ITrack;
 
 public class NaiveConferenceScheduler implements IConferenceScheduler
 {
-    
-    private static final int AFTERNOON_TIME_ALLOCATION = 60 * 4;
+    // from 9:00 AM to 12:00 PM
     private static final int MORNING_TIME_ALLOCATION = 60 * 3;
+    
+    // from 1:00 PM to 5:00 PM
+    private static final int AFTERNOON_TIME_ALLOCATION = 60 * 4;
     
     public IConference schedule(String[] proposals)
     {
@@ -33,7 +35,7 @@ public class NaiveConferenceScheduler implements IConferenceScheduler
                 if (aTalk.minutes() > MORNING_TIME_ALLOCATION
                         && aTalk.minutes() > AFTERNOON_TIME_ALLOCATION)
                 {
-                    throw new IllegalArgumentException("a talk is too long, title " + aTalk.title());
+                    throw new IllegalArgumentException("this talk is too long, title " + aTalk.title());
                 }
             }
             
@@ -68,41 +70,35 @@ public class NaiveConferenceScheduler implements IConferenceScheduler
     {
         List<ISession> sessions = new ArrayList<ISession>();
         
-        ISession morningSession = assignTalksToSession(proposalTalks, MORNING_TIME_ALLOCATION, TimeUtils.MORNING_START);
-        if (morningSession != null)
-        {
-            sessions.add(morningSession);
-        }
+        ISession morningSession = assignTalksToSession(proposalTalks, MORNING_TIME_ALLOCATION, ITrack.MORNING_START_9_AM);
+        sessions.add(morningSession);
         
-        ISession afternoonSession = assignTalksToSession(proposalTalks, AFTERNOON_TIME_ALLOCATION, TimeUtils.AFTERNOON_START);
-        if (afternoonSession != null)
-        {
-            sessions.add(afternoonSession);
-        }
+        ISession afternoonSession = assignTalksToSession(proposalTalks, AFTERNOON_TIME_ALLOCATION, ITrack.AFTERNOON_START_1_PM);
+        sessions.add(afternoonSession);
         
         return new Track(Integer.toString(trackId), morningSession, afternoonSession);
     }
     
     ISession assignTalksToSession(List<ITalk> proposalTalks, int timeAllocationInMinutes, LocalTime sessionStartTime)
     {
-        int timeAllocation = timeAllocationInMinutes;
+        int remainingTimeInMinutes = timeAllocationInMinutes;
         List<ITalk> talks = new ArrayList<ITalk>();
         
         int index = 0;
         do
         {
             if (proposalTalks.get(index) != null
-                    && timeAllocation >= proposalTalks.get(index).minutes())
+                    && remainingTimeInMinutes >= proposalTalks.get(index).minutes())
             {
                 talks.add(proposalTalks.get(index));
                 
-                timeAllocation -= proposalTalks.get(index).minutes();
+                remainingTimeInMinutes -= proposalTalks.get(index).minutes();
                 proposalTalks.set(index, null);
             }
             
             index++;
         }
-        while (timeAllocation > 0 && index < proposalTalks.size());
+        while (remainingTimeInMinutes > 0 && index < proposalTalks.size());
         
         return new Session(sessionStartTime, talks.toArray(new ITalk[0]));
     }

@@ -54,9 +54,9 @@ public class Track implements ITrack
     
     public LocalTime networkingStartTime()
     {
-        if (afternoonSession().endTime().isBefore(EARLY_NETWORKING_START))
+        if (afternoonSession().endTime().isBefore(EARLY_NETWORKING_START_4_PM))
         {
-            return EARLY_NETWORKING_START;
+            return EARLY_NETWORKING_START_4_PM;
         }
         return afternoonSession().endTime();
     }

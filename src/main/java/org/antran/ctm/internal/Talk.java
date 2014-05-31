@@ -10,7 +10,6 @@ public class Talk implements ITalk
     
     Talk(String title, Integer minutes)
     {
-        
         if (minutes == null)
         {
             throw new IllegalArgumentException("minutes is null");
