@@ -54,10 +54,13 @@ public class ConferenceScheduler implements IConferenceScheduler {
 		if (morningSession != null) {
 			sessions.add(morningSession);
 		}
+		// TODO: add a session as Lunch
+
 		ISession afternoonSession = assignAfternoonSession(proposalTalks);
 		if (afternoonSession != null) {
 			sessions.add(afternoonSession);
 		}
+		// TODO: check and add a session as NETWORKING
 
 		ITrack track = new Track(Integer.toString(id),
 				sessions.toArray(new ISession[0]));

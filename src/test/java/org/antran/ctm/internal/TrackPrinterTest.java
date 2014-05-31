@@ -2,9 +2,7 @@ package org.antran.ctm.internal;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
-import static org.junit.Assert.*;
-
-import java.util.Date;
+import static org.junit.Assert.assertTrue;
 
 import org.antran.ctm.api.ISession;
 import org.antran.ctm.api.ITalkDetail;
@@ -55,7 +53,8 @@ public class TrackPrinterTest {
 
 		String detail = printer.print(talkDetail);
 
-		assertThat(detail, containsString("09:00AM a title"));
+		System.out.println(detail);
+		assertTrue(detail.contains("09:00AM a title"));
 	}
 
 }

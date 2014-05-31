@@ -18,7 +18,7 @@ public class TalkBuilderTest {
 				.from("Writing Fast Tests Against Enterprise Rails 60min");
 
 		assertNotNull(aTalk);
-		assertEquals("Writing Fast Tests Against Enterprise Rails",
+		assertEquals("Writing Fast Tests Against Enterprise Rails 60min",
 				aTalk.title());
 		assertEquals(60, aTalk.minutes());
 	}
@@ -28,7 +28,7 @@ public class TalkBuilderTest {
 		ITalk aTalk = TalkBuilder.from("Rails for Python Developers lightning");
 
 		assertNotNull(aTalk);
-		assertEquals("Rails for Python Developers", aTalk.title());
+		assertEquals("Rails for Python Developers lightning", aTalk.title());
 		assertEquals(5, aTalk.minutes());
 	}
 

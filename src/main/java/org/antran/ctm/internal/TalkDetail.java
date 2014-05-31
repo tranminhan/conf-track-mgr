@@ -10,7 +10,7 @@ public class TalkDetail implements ITalkDetail {
 	private String title;
 
 	public TalkDetail(Date start, String title) {
-		this.start = start;
+		this.start = (Date) start.clone();
 		this.title = title;
 	}
 
