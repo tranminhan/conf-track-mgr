@@ -24,10 +24,10 @@ public class TrackPrinterTest {
 	@Test
 	public void shouldPrintText() {
 		// given
-		ISession morningSession = new Session(TimeUtils.morningStart,
+		ISession morningSession = new Session(TimeUtils.MORNING_START,
 				TalkBuilder.from(morningTalks));
 
-		ISession afternoonSession = new Session(TimeUtils.afternoonStart,
+		ISession afternoonSession = new Session(TimeUtils.AFTERNOON_START,
 				TalkBuilder.from(afternoonTalks));
 
 		ITrack track = new Track("1", new ISession[] { morningSession,
@@ -47,7 +47,7 @@ public class TrackPrinterTest {
 
 	@Test
 	public void shouldPrintTalkDetail() {
-		ITalkDetail talkDetail = new TalkDetail(TimeUtils.morningStart,
+		ITalkDetail talkDetail = new TalkDetail(TimeUtils.MORNING_START,
 				"a title");
 		ITrackPrinter printer = new TrackPrinter();
 

@@ -1,8 +1,8 @@
 package org.antran.ctm.internal;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -13,10 +13,10 @@ import org.antran.ctm.api.ITalkDetail;
 public class Session implements ISession {
 
 	final List<ITalk> talks;
-	private Date startTime;
+	private LocalTime startTime;
 
-	public Session(Date startTime, ITalk[] proposalTalks) {
-		this.startTime = (Date) startTime.clone();
+	public Session(LocalTime startTime, ITalk[] proposalTalks) {
+		this.startTime = startTime;
 		this.talks = Arrays.asList(proposalTalks);
 	}
 
@@ -27,22 +27,21 @@ public class Session implements ISession {
 	public ITalkDetail[] getTalkDetails() {
 		List<ITalkDetail> talkDetails = new ArrayList<ITalkDetail>();
 
-		Date talkStart = (Date) startTime.clone();
+		LocalTime talkStart = startTime;
 		for (ITalk talk : talks) {
-			talkDetails.add(new TalkDetail((Date) talkStart.clone(), talk
-					.title()));
+			talkDetails.add(new TalkDetail(talkStart, talk.title()));
 
-			talkStart.setMinutes(talkStart.getMinutes() + talk.minutes());
+			talkStart = talkStart.plusMinutes(talk.minutes());
 		}
 		return talkDetails.toArray(new ITalkDetail[0]);
 	}
 
-	public Date endTime() {
-		Date talkStart = (Date) startTime.clone();
+	public LocalTime endTime() {
+		LocalTime endTime = startTime;
 		for (ITalk talk : talks) {
-			talkStart.setMinutes(talkStart.getMinutes() + talk.minutes());
+			endTime = endTime.plusMinutes(talk.minutes());
 		}
-		return (Date) talkStart.clone();
+		return endTime;
 	}
 
 }

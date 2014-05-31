@@ -1,20 +1,20 @@
 package org.antran.ctm.internal;
 
-import java.util.Date;
+import java.time.LocalTime;
 
 import org.antran.ctm.api.ITalkDetail;
 
 public class TalkDetail implements ITalkDetail {
 
-	private Date start;
+	private LocalTime start;
 	private String title;
 
-	public TalkDetail(Date start, String title) {
-		this.start = (Date) start.clone();
+	public TalkDetail(LocalTime start, String title) {
+		this.start = start;
 		this.title = title;
 	}
 
-	public Date start() {
+	public LocalTime start() {
 		return start;
 	}
 

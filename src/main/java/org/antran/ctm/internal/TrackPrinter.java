@@ -1,6 +1,6 @@
 package org.antran.ctm.internal;
 
-import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 
 import org.antran.ctm.api.ISession;
 import org.antran.ctm.api.ITalkDetail;
@@ -8,6 +8,8 @@ import org.antran.ctm.api.ITrack;
 import org.antran.ctm.api.ITrackPrinter;
 
 public class TrackPrinter implements ITrackPrinter {
+	static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter
+			.ofPattern("hh:mma");
 
 	public String print(ITrack track) {
 		StringBuilder content = new StringBuilder();
@@ -20,11 +22,12 @@ public class TrackPrinter implements ITrackPrinter {
 
 		printSession(content, morningSession);
 
-		content.append(sdf.format(TimeUtils.lunchTime) + " " + "Lunch");
+		content.append(dateTimeFormatter.format(TimeUtils.LUNCH_TIME) + " "
+				+ "Lunch");
 		printSession(content, afterternoonSession);
 
-		content.append(sdf.format(afterternoonSession.endTime()) + " "
-				+ "Networking Event");
+		content.append(dateTimeFormatter.format(afterternoonSession.endTime())
+				+ " " + "Networking Event");
 
 		return content.toString();
 	}
@@ -37,14 +40,9 @@ public class TrackPrinter implements ITrackPrinter {
 		}
 	}
 
-	static SimpleDateFormat sdf;
-	static {
-		sdf = new SimpleDateFormat("hh:mma");
-	}
-
 	public String print(ITalkDetail talkDetail) {
 		StringBuilder content = new StringBuilder();
-		content.append(sdf.format(talkDetail.start()) + " "
+		content.append(dateTimeFormatter.format(talkDetail.start()) + " "
 				+ talkDetail.title());
 		return content.toString();
 	}

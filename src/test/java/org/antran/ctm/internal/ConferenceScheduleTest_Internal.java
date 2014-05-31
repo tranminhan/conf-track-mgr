@@ -25,7 +25,7 @@ public class ConferenceScheduleTest_Internal {
 				.from(TWO_PROPOSALS));
 
 		ISession morningSession = conferenceSchedule.assignTalksToSession(
-				proposalTalks, MORNING_TIME_ALLOCATION, TimeUtils.morningStart);
+				proposalTalks, MORNING_TIME_ALLOCATION, TimeUtils.MORNING_START);
 
 		assertNotNull(morningSession);
 		assertOneTalksLeft(proposalTalks);

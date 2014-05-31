@@ -1,10 +1,10 @@
 package org.antran.ctm.api;
 
-import java.util.Date;
+import java.time.LocalTime;
 
 public interface ITalkDetail {
 
-	Date start();
+	LocalTime start();
 
 	String title();
 

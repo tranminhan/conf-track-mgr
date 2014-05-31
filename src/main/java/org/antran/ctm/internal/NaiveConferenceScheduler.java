@@ -1,8 +1,8 @@
 package org.antran.ctm.internal;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 import org.antran.ctm.api.IConference;
@@ -52,13 +52,13 @@ public class NaiveConferenceScheduler implements IConferenceScheduler {
 		List<ISession> sessions = new ArrayList<ISession>();
 
 		ISession morningSession = assignTalksToSession(proposalTalks,
-				MORNING_TIME_ALLOCATION, TimeUtils.morningStart);
+				MORNING_TIME_ALLOCATION, TimeUtils.MORNING_START);
 		if (morningSession != null) {
 			sessions.add(morningSession);
 		}
 
 		ISession afternoonSession = assignTalksToSession(proposalTalks,
-				AFTERNOON_TIME_ALLOCATION, TimeUtils.afternoonStart);
+				AFTERNOON_TIME_ALLOCATION, TimeUtils.AFTERNOON_START);
 		if (afternoonSession != null) {
 			sessions.add(afternoonSession);
 		}
@@ -69,7 +69,7 @@ public class NaiveConferenceScheduler implements IConferenceScheduler {
 	}
 
 	ISession assignTalksToSession(List<ITalk> proposalTalks,
-			int timeAllocationInMinutes, Date sessionStartTime) {
+			int timeAllocationInMinutes, LocalTime sessionStartTime) {
 		int timeAllocation = timeAllocationInMinutes;
 		List<ITalk> talks = new ArrayList<ITalk>();
 
