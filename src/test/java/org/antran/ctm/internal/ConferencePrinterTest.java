@@ -1,12 +1,15 @@
 package org.antran.ctm.internal;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.assertTrue;
 
-import org.antran.ctm.api.ISession;
-import org.antran.ctm.api.ITrack;
+import java.util.Arrays;
+import java.util.List;
+
+import org.antran.ctm.api.IConference;
 import org.antran.ctm.api.IConferencePrinter;
+import org.antran.ctm.api.ISession;
+import org.antran.ctm.api.ITalk;
+import org.antran.ctm.api.ITrack;
 import org.antran.ctm.api.TalkDetail;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,7 +35,7 @@ public class ConferencePrinterTest
     }
     
     @Test
-    public void shouldPrintText()
+    public void shouldPrintTextForTrack()
     {
         // given
         ISession morningSession = new Session(TimeUtils.MORNING_START,
@@ -48,11 +51,44 @@ public class ConferencePrinterTest
         String flyoutContent = printer.print(track);
         
         // then
-        assertThat(flyoutContent, containsString("Track 1:"));
-        assertTrue(flyoutContent
-                .contains("09:00AM Writing Fast Tests Against Enterprise Rails 60min"));
+        assertTrue(flyoutContent.contains("Track 1:"));
+        assertTrue(flyoutContent.contains("09:00AM Writing Fast Tests Against Enterprise Rails 60min"));
         assertTrue(flyoutContent.contains("Rails for Python Developers lightning"));
         assertTrue(flyoutContent.contains("12:00PM Lunch"));
+    }
+    
+    @Test
+    public void shouldPrintTextForConference()
+    {
+        // given
+        List<ITrack> tracks = Arrays.asList(new ITrack[] {
+                new Track("1", new ISession[] {
+                        new Session(TimeUtils.MORNING_START, new ITalk[] {
+                                new Talk("talk 1", 10)
+                        }),
+                        new Session(TimeUtils.AFTERNOON_START, new ITalk[] {
+                                new Talk("talk 2", 15)
+                        })
+                }),
+                new Track("2", new ISession[] {
+                        new Session(TimeUtils.MORNING_START, new ITalk[] {
+                                new Talk("talk 3", 10)
+                        }),
+                        new Session(TimeUtils.AFTERNOON_START, new ITalk[] {
+                                new Talk("talk 4", 15)
+                        })
+                })
+        
+        });
+        IConference conference = new Conference(tracks);
+        
+        // when
+        String flyoutContent = printer.print(conference);
+        System.out.println(flyoutContent);
+        
+        // then
+        assertTrue(flyoutContent.contains("Track 1:"));
+        assertTrue(flyoutContent.contains("Track 2:"));
     }
     
     @Test
