@@ -24,7 +24,7 @@ public class ConferenceScheduleTest {
 	@Test
 	public void shouldCreateConfFromNoProposal() {
 		// given
-		IConferenceScheduler confScheduler = new ConferenceScheduler();
+		IConferenceScheduler confScheduler = new NaiveConferenceScheduler();
 
 		// when
 		IConference conference = confScheduler.schedule(NO_PROPOSAL);
@@ -40,7 +40,7 @@ public class ConferenceScheduleTest {
 	@Test
 	public void shouldCreateConfFromOneProposal() {
 		// given
-		IConferenceScheduler confScheduler = new ConferenceScheduler();
+		IConferenceScheduler confScheduler = new NaiveConferenceScheduler();
 
 		// when
 		IConference conference = confScheduler.schedule(ONE_PROPOSAL);
@@ -63,7 +63,7 @@ public class ConferenceScheduleTest {
 	@Test
 	public void shouldCreateConfWithOneTrackAndTwoSessions() {
 		// given
-		IConferenceScheduler confScheduler = new ConferenceScheduler();
+		IConferenceScheduler confScheduler = new NaiveConferenceScheduler();
 
 		// when
 		IConference conference = confScheduler

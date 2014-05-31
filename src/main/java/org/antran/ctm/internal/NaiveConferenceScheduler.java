@@ -10,16 +10,10 @@ import org.antran.ctm.api.ISession;
 import org.antran.ctm.api.ITalk;
 import org.antran.ctm.api.ITrack;
 
-public class ConferenceScheduler implements IConferenceScheduler {
+public class NaiveConferenceScheduler implements IConferenceScheduler {
 
 	private static final int AFTERNOON_TIME_ALLOCATION = 60 * 4;
-	private static final int MORNING_ALLOCATION = 60 * 3;
-	private static ISession LUNCH_SESSION;
-
-	static {
-		LUNCH_SESSION = new Session(TimeUtils.lunchTime,
-				new ITalk[] { new Talk("Lunch", 60) });
-	}
+	private static final int MORNING_TIME_ALLOCATION = 60 * 3;
 
 	public IConference schedule(String[] proposals) {
 		IConference conference = null;
@@ -65,7 +59,6 @@ public class ConferenceScheduler implements IConferenceScheduler {
 		if (afternoonSession != null) {
 			sessions.add(afternoonSession);
 		}
-		// TODO: check and add a session as NETWORKING
 
 		ITrack track = new Track(Integer.toString(id),
 				sessions.toArray(new ISession[0]));
@@ -97,7 +90,7 @@ public class ConferenceScheduler implements IConferenceScheduler {
 	}
 
 	ISession assignMorningSession(List<ITalk> proposalTalks) {
-		int timeAllocation = MORNING_ALLOCATION;
+		int timeAllocation = MORNING_TIME_ALLOCATION;
 		List<ITalk> talks = new ArrayList<ITalk>();
 
 		int index = 0;

@@ -1,16 +1,14 @@
 package org.antran.ctm.internal;
 
 import org.antran.ctm.api.ITalk;
-import org.apache.commons.lang3.StringUtils;
 
 public class Talk implements ITalk {
 
-	
 	private final String title;
 	private final int minutes;
 
 	Talk(String title, Integer minutes) {
-		
+
 		if (minutes == null) {
 			throw new IllegalArgumentException("minutes is null");
 		}

@@ -16,7 +16,7 @@ public class ConferenceScheduleTest_Internal {
 			"Rails for Python Developers 120min",
 			"Rails for Python Developers 10min" };
 
-	ConferenceScheduler conferenceSchedule = new ConferenceScheduler();
+	NaiveConferenceScheduler conferenceSchedule = new NaiveConferenceScheduler();
 
 	@Test
 	public void shouldAssignToMorningSession() {
