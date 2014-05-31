@@ -38,7 +38,6 @@ public class TrackPrinterTest {
 		String text = printer.print(track);
 
 		// then
-		System.out.println(text);
 		assertThat(text, containsString("Track 1:"));
 		assertTrue(text
 				.contains("09:00AM Writing Fast Tests Against Enterprise Rails 60min"));
@@ -54,7 +53,6 @@ public class TrackPrinterTest {
 
 		String detail = printer.print(talkDetail);
 
-		System.out.println(detail);
 		assertTrue(detail.contains("09:00AM a title"));
 	}
 

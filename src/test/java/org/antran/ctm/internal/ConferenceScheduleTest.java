@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.antran.ctm.api.IConference;
 import org.antran.ctm.api.IConferenceScheduler;
 import org.antran.ctm.api.ITrack;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -16,11 +17,15 @@ public class ConferenceScheduleTest {
 			"Writing Fast Tests Against Enterprise Rails 60min",
 			"Rails for Python Developers lightning" };
 
+	IConferenceScheduler confScheduler;
+
+	@Before
+	public void setup() {
+		confScheduler = new NaiveConferenceScheduler();
+	}
+
 	@Test
 	public void shouldCreateConfFromNoProposal() {
-		// given
-		IConferenceScheduler confScheduler = new NaiveConferenceScheduler();
-
 		// when
 		IConference conference = confScheduler.schedule(NO_PROPOSAL);
 
@@ -34,9 +39,6 @@ public class ConferenceScheduleTest {
 
 	@Test
 	public void shouldCreateConfFromOneProposal() {
-		// given
-		IConferenceScheduler confScheduler = new NaiveConferenceScheduler();
-
 		// when
 		IConference conference = confScheduler.schedule(ONE_PROPOSAL);
 
@@ -57,9 +59,6 @@ public class ConferenceScheduleTest {
 
 	@Test
 	public void shouldCreateConfWithOneTrackAndTwoSessions() {
-		// given
-		IConferenceScheduler confScheduler = new NaiveConferenceScheduler();
-
 		// when
 		IConference conference = confScheduler
 				.schedule(ONE_TRACK_TWO_SESSIONS_PROPOSALS);
@@ -77,14 +76,10 @@ public class ConferenceScheduleTest {
 	static final String[] TWO_TRACK_PROPOSALS = {
 			"Writing Fast Tests Against Enterprise Rails 180min",
 			"Rails for Python Developers lightning",
-			"Overdoing it in Python 200min", 
-			"Overdoing it in Python 180min", };
+			"Overdoing it in Python 200min", "Overdoing it in Python 180min", };
 
 	@Test
 	public void shouldCreateConfWithTwoTracks() {
-		// given
-		IConferenceScheduler confScheduler = new NaiveConferenceScheduler();
-
 		// when
 		IConference conference = confScheduler.schedule(TWO_TRACK_PROPOSALS);
 
