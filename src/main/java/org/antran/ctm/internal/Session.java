@@ -27,7 +27,7 @@ public class Session implements ISession
         return talks.iterator();
     }
     
-    public TalkDetail[] getTalkDetails()
+    public TalkDetail[] talkDetails()
     {
         List<TalkDetail> talkDetails = new ArrayList<TalkDetail>();
         

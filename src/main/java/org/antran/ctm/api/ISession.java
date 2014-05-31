@@ -5,7 +5,7 @@ import java.time.LocalTime;
 public interface ISession extends Iterable<ITalk>
 {
     
-    TalkDetail[] getTalkDetails();
+    TalkDetail[] talkDetails();
     
     LocalTime endTime();
 }

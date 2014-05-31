@@ -34,7 +34,7 @@ public class ConferencePrinter implements IConferencePrinter
     
     private void printSession(StringBuilder content, ISession morningSession)
     {
-        TalkDetail[] talkDetails = morningSession.getTalkDetails();
+        TalkDetail[] talkDetails = morningSession.talkDetails();
         for (TalkDetail talkDetail : talkDetails)
         {
             content.append(this.print(talkDetail));
