@@ -6,6 +6,7 @@ import static org.junit.Assert.assertNotNull;
 import org.antran.ctm.api.IConference;
 import org.antran.ctm.api.IConferencePrinter;
 import org.antran.ctm.api.IConferenceScheduler;
+import org.antran.ctm.api.ISession;
 import org.antran.ctm.api.ITrack;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,10 +15,6 @@ public class ConferenceScheduleTest
 {
     
     static final String[] NO_PROPOSAL = {};
-    
-    static final String[] TWO_PROPOSALS = {
-            "Writing Fast Tests Against Enterprise Rails 60min",
-            "Rails for Python Developers lightning" };
     
     IConferenceScheduler conferenceScheduler;
     
@@ -55,6 +52,29 @@ public class ConferenceScheduleTest
         ITrack track = conference.track(0);
         assertNotNull(track);
         assertEquals(1, track.numberOfSessions());
+    }
+    
+    static final String[] ONE_TRACK_ONE_SESSION_TWO_PROPOSALS = {
+            "Writing Fast Tests Against Enterprise Rails 60min",
+            "Rails for Python Developers lightning" };
+    
+    @Test
+    public void shouldCreateConfFromTwoProposals()
+    {
+        // when
+        IConference conference = conferenceScheduler.schedule(ONE_TRACK_ONE_SESSION_TWO_PROPOSALS);
+        
+        // then
+        assertNotNull(conference);
+        assertEquals(1, conference.numberOfTracks());
+        assertNotNull(conference.tracks());
+        
+        ITrack track = conference.track(0);
+        assertNotNull(track);
+        assertEquals(1, track.numberOfSessions());
+        
+        ISession session = track.sessions()[0];
+        assertEquals(2, session.talkDetails().length);
     }
     
     static final String[] ONE_TRACK_TWO_SESSIONS_PROPOSALS = {
@@ -143,10 +163,47 @@ public class ConferenceScheduleTest
         track = conference.track(1);
         assertNotNull(track);
         assertEquals(2, track.numberOfSessions());
-        
-        // print
-        IConferencePrinter printer = new ConferencePrinter();
-        String flyoutContent = printer.print(conference);
-        System.out.println(flyoutContent);
     }
+    
+    static final String[] TOO_LONG_PROPOSALS = {
+            // 5 hours 1 min
+            "Writing Fast Tests Against Enterprise Rails 301min"
+    };
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldThrowExceptionWhenATalkIsBiggerThanASession()
+    {
+        conferenceScheduler.schedule(TOO_LONG_PROPOSALS);
+    }
+    
+    static final String[] ONE_LONG_TALK_FOR_ATERNOON = {
+            // 3 hours 20 min
+            "Writing Fast Tests Against Enterprise Rails 200min",
+            "Woah 30min"
+    };
+    
+    @Test
+    public void shouldScheduleLongTalkToTheAfternoonSession()
+    {
+        // when
+        IConference conference = conferenceScheduler.schedule(ONE_LONG_TALK_FOR_ATERNOON);
+        
+        // then
+        assertNotNull(conference);
+        assertEquals(1, conference.numberOfTracks());
+        assertNotNull(conference.tracks());
+        
+        ITrack track = conference.track(0);
+        assertNotNull(track);
+        assertEquals(2, track.numberOfSessions());
+        
+        ISession morningSession = track.sessions()[0];
+        assertEquals(1, morningSession.talkDetails().length);
+        assertEquals("Woah 30min", morningSession.talkDetails()[0].title());
+        
+        ISession afternoonSession = track.sessions()[1];
+        assertEquals(1, afternoonSession.talkDetails().length);
+        assertEquals("Writing Fast Tests Against Enterprise Rails 200min", afternoonSession.talkDetails()[0].title());
+    }
+    
 }

@@ -24,9 +24,19 @@ public class NaiveConferenceScheduler implements IConferenceScheduler
         {
             return new Conference();
         }
+        
         if (proposals.length > 0)
         {
             List<ITalk> proposalTalks = Arrays.asList(TalkBuilder.from(proposals));
+            for (ITalk aTalk : proposalTalks)
+            {
+                if (aTalk.minutes() > MORNING_TIME_ALLOCATION
+                        && aTalk.minutes() > AFTERNOON_TIME_ALLOCATION)
+                {
+                    throw new IllegalArgumentException("a talk is too long, title " + aTalk.title());
+                }
+            }
+            
             List<ITrack> tracks = new ArrayList<ITrack>();
             
             int id = 0;
