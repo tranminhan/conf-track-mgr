@@ -16,7 +16,7 @@ public class Session implements ISession {
 	private Date startTime;
 
 	public Session(Date startTime, ITalk[] proposalTalks) {
-		this.startTime = startTime;
+		this.startTime = (Date) startTime.clone();
 		this.talks = Arrays.asList(proposalTalks);
 	}
 
@@ -27,13 +27,22 @@ public class Session implements ISession {
 	public ITalkDetail[] getTalkDetails() {
 		List<ITalkDetail> talkDetails = new ArrayList<ITalkDetail>();
 
-		Date talkStart = startTime;
+		Date talkStart = (Date) startTime.clone();
 		for (ITalk talk : talks) {
-			talkDetails.add(new TalkDetail((Date) startTime.clone(), talk.title()));
+			talkDetails.add(new TalkDetail((Date) talkStart.clone(), talk
+					.title()));
 
 			talkStart.setMinutes(talkStart.getMinutes() + talk.minutes());
 		}
 		return talkDetails.toArray(new ITalkDetail[0]);
+	}
+
+	public Date endTime() {
+		Date talkStart = (Date) startTime.clone();
+		for (ITalk talk : talks) {
+			talkStart.setMinutes(talkStart.getMinutes() + talk.minutes());
+		}
+		return (Date) talkStart.clone();
 	}
 
 }

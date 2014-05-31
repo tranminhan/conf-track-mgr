@@ -43,6 +43,7 @@ public class TrackPrinterTest {
 		assertTrue(text
 				.contains("09:00AM Writing Fast Tests Against Enterprise Rails 60min"));
 		assertTrue(text.contains("Rails for Python Developers lightning"));
+		assertTrue(text.contains("12:00PM Lunch"));
 	}
 
 	@Test

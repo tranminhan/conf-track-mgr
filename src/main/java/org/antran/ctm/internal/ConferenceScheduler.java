@@ -14,6 +14,12 @@ public class ConferenceScheduler implements IConferenceScheduler {
 
 	private static final int AFTERNOON_TIME_ALLOCATION = 60 * 4;
 	private static final int MORNING_ALLOCATION = 60 * 3;
+	private static ISession LUNCH_SESSION;
+
+	static {
+		LUNCH_SESSION = new Session(TimeUtils.lunchTime,
+				new ITalk[] { new Talk("Lunch", 60) });
+	}
 
 	public IConference schedule(String[] proposals) {
 		IConference conference = null;
@@ -54,7 +60,6 @@ public class ConferenceScheduler implements IConferenceScheduler {
 		if (morningSession != null) {
 			sessions.add(morningSession);
 		}
-		// TODO: add a session as Lunch
 
 		ISession afternoonSession = assignAfternoonSession(proposalTalks);
 		if (afternoonSession != null) {

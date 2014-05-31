@@ -15,14 +15,26 @@ public class TrackPrinter implements ITrackPrinter {
 		content.append("\n");
 
 		ISession[] sessions = track.sessions();
-		for (ISession aSession : sessions) {
-			ITalkDetail[] talkDetails = aSession.getTalkDetails();
-			for (ITalkDetail talkDetail : talkDetails) {
-				content.append(this.print(talkDetail));
-				content.append("\n");
-			}
-		}
+		ISession morningSession = sessions[0];
+		ISession afterternoonSession = sessions[1];
+
+		printSession(content, morningSession);
+
+		content.append(sdf.format(TimeUtils.lunchTime) + " " + "Lunch");
+		printSession(content, afterternoonSession);
+
+		content.append(sdf.format(afterternoonSession.endTime()) + " "
+				+ "Networking Event");
+
 		return content.toString();
+	}
+
+	private void printSession(StringBuilder content, ISession morningSession) {
+		ITalkDetail[] talkDetails = morningSession.getTalkDetails();
+		for (ITalkDetail talkDetail : talkDetails) {
+			content.append(this.print(talkDetail));
+			content.append("\n");
+		}
 	}
 
 	static SimpleDateFormat sdf;
