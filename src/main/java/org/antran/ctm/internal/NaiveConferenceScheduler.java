@@ -2,6 +2,7 @@ package org.antran.ctm.internal;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import org.antran.ctm.api.IConference;
@@ -50,12 +51,14 @@ public class NaiveConferenceScheduler implements IConferenceScheduler {
 	private ITrack assignTalksToTrack(int id, List<ITalk> proposalTalks) {
 		List<ISession> sessions = new ArrayList<ISession>();
 
-		ISession morningSession = assignMorningSession(proposalTalks);
+		ISession morningSession = assignTalksToSession(proposalTalks,
+				MORNING_TIME_ALLOCATION, TimeUtils.morningStart);
 		if (morningSession != null) {
 			sessions.add(morningSession);
 		}
 
-		ISession afternoonSession = assignAfternoonSession(proposalTalks);
+		ISession afternoonSession = assignTalksToSession(proposalTalks,
+				AFTERNOON_TIME_ALLOCATION, TimeUtils.afternoonStart);
 		if (afternoonSession != null) {
 			sessions.add(afternoonSession);
 		}
@@ -65,9 +68,9 @@ public class NaiveConferenceScheduler implements IConferenceScheduler {
 		return track;
 	}
 
-	ISession assignAfternoonSession(List<ITalk> proposalTalks) {
-		int timeAllocation = AFTERNOON_TIME_ALLOCATION;
-
+	ISession assignTalksToSession(List<ITalk> proposalTalks,
+			int timeAllocationInMinutes, Date sessionStartTime) {
+		int timeAllocation = timeAllocationInMinutes;
 		List<ITalk> talks = new ArrayList<ITalk>();
 
 		int index = 0;
@@ -75,29 +78,7 @@ public class NaiveConferenceScheduler implements IConferenceScheduler {
 			if (proposalTalks.get(index) != null
 					&& timeAllocation >= proposalTalks.get(index).minutes()) {
 				talks.add(proposalTalks.get(index));
-				timeAllocation -= proposalTalks.get(index).minutes();
-				proposalTalks.set(index, null);
-			}
-			index++;
-		} while (timeAllocation > 0 && index < proposalTalks.size());
 
-		if (talks.isEmpty()) {
-			return null;
-		}
-
-		return new Session(TimeUtils.afternoonStart,
-				talks.toArray(new ITalk[0]));
-	}
-
-	ISession assignMorningSession(List<ITalk> proposalTalks) {
-		int timeAllocation = MORNING_TIME_ALLOCATION;
-		List<ITalk> talks = new ArrayList<ITalk>();
-
-		int index = 0;
-		do {
-			if (proposalTalks.get(index) != null
-					&& timeAllocation >= proposalTalks.get(index).minutes()) {
-				talks.add(proposalTalks.get(index));
 				timeAllocation -= proposalTalks.get(index).minutes();
 				proposalTalks.set(index, null);
 			}
@@ -109,6 +90,6 @@ public class NaiveConferenceScheduler implements IConferenceScheduler {
 			return null;
 		}
 
-		return new Session(TimeUtils.morningStart, talks.toArray(new ITalk[0]));
+		return new Session(sessionStartTime, talks.toArray(new ITalk[0]));
 	}
 }

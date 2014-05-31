@@ -17,14 +17,15 @@ public class ConferenceScheduleTest_Internal {
 			"Rails for Python Developers 10min" };
 
 	NaiveConferenceScheduler conferenceSchedule = new NaiveConferenceScheduler();
+	private static final int MORNING_TIME_ALLOCATION = 60 * 3;
 
 	@Test
 	public void shouldAssignToMorningSession() {
 		List<ITalk> proposalTalks = Arrays.asList(TalkBuilder
 				.from(TWO_PROPOSALS));
 
-		ISession morningSession = conferenceSchedule
-				.assignMorningSession(proposalTalks);
+		ISession morningSession = conferenceSchedule.assignTalksToSession(
+				proposalTalks, MORNING_TIME_ALLOCATION, TimeUtils.morningStart);
 
 		assertNotNull(morningSession);
 		assertOneTalksLeft(proposalTalks);

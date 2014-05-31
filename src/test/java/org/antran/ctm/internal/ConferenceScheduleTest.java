@@ -16,11 +16,6 @@ public class ConferenceScheduleTest {
 			"Writing Fast Tests Against Enterprise Rails 60min",
 			"Rails for Python Developers lightning" };
 
-	// static final String[] THREE_TRACK_PROPOSALS = {
-	// "Writing Fast Tests Against Enterprise Rails 60min",
-	// "Rails for Python Developers lightning",
-	// "Overdoing it in Python 45min", };
-
 	@Test
 	public void shouldCreateConfFromNoProposal() {
 		// given
@@ -77,5 +72,33 @@ public class ConferenceScheduleTest {
 		ITrack track = conference.track(0);
 		assertNotNull(track);
 		assertEquals(2, track.numberOfSessions());
+	}
+
+	static final String[] TWO_TRACK_PROPOSALS = {
+			"Writing Fast Tests Against Enterprise Rails 180min",
+			"Rails for Python Developers lightning",
+			"Overdoing it in Python 200min", 
+			"Overdoing it in Python 180min", };
+
+	@Test
+	public void shouldCreateConfWithTwoTracks() {
+		// given
+		IConferenceScheduler confScheduler = new NaiveConferenceScheduler();
+
+		// when
+		IConference conference = confScheduler.schedule(TWO_TRACK_PROPOSALS);
+
+		// then
+		assertNotNull(conference);
+		assertEquals(2, conference.numberOfTracks());
+		assertNotNull(conference.tracks());
+
+		ITrack track = conference.track(0);
+		assertNotNull(track);
+		assertEquals(2, track.numberOfSessions());
+
+		track = conference.track(1);
+		assertNotNull(track);
+		assertEquals(1, track.numberOfSessions());
 	}
 }
