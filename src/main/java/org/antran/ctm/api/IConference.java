@@ -7,7 +7,7 @@ public interface IConference
     
     int numberOfTracks();
     
-    List<ITrack> tracks();
+    ITrack[] tracks();
     
     ITrack track(int index);
     

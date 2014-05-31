@@ -22,9 +22,18 @@ public class Track implements ITrack
         this.sessions = sessions.clone();
     }
     
-    public int numberOfSessions()
+    public int numberOfSessionWithTalks()
     {
-        return sessions.length;
+        int result = 0;
+        if (sessions[0].talkDetails().length > 0)
+        {
+            result++;
+        }
+        if (sessions[1].talkDetails().length > 0)
+        {
+            result++;
+        }
+        return result;
     }
     
     public String id()

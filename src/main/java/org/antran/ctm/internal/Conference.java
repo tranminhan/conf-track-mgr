@@ -1,7 +1,6 @@
 package org.antran.ctm.internal;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.antran.ctm.api.IConference;
@@ -31,9 +30,9 @@ public class Conference implements IConference
         return tracks.size();
     }
     
-    public List<ITrack> tracks()
+    public ITrack[] tracks()
     {
-        return Collections.unmodifiableList(tracks);
+        return tracks.toArray(new ITrack[0]);
     }
     
     public ITrack track(int index)

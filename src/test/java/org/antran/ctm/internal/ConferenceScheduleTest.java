@@ -50,7 +50,7 @@ public class ConferenceScheduleTest
         
         ITrack track = conference.track(0);
         assertNotNull(track);
-        assertEquals(2, track.numberOfSessions());
+        assertEquals(1, track.numberOfSessionWithTalks());
     }
     
     static final String[] ONE_TRACK_ONE_SESSION_TWO_PROPOSALS = {
@@ -70,10 +70,10 @@ public class ConferenceScheduleTest
         
         ITrack track = conference.track(0);
         assertNotNull(track);
-        assertEquals(2, track.numberOfSessions());
+        assertEquals(1, track.numberOfSessionWithTalks());
         
-        ISession session = track.morningSession();
-        assertEquals(2, session.talkDetails().length);
+        assertEquals(2, track.morningSession().talkDetails().length);
+        assertEquals(0, track.afternoonSession().talkDetails().length);
     }
     
     static final String[] ONE_TRACK_TWO_SESSIONS_PROPOSALS = {
@@ -95,13 +95,17 @@ public class ConferenceScheduleTest
         
         ITrack track = conference.track(0);
         assertNotNull(track);
-        assertEquals(2, track.numberOfSessions());
+        assertEquals(2, track.numberOfSessionWithTalks());
     }
     
     static final String[] TWO_TRACK_PROPOSALS = {
+            // 3 hours
             "Writing Fast Tests Against Enterprise Rails 180min",
             "Rails for Python Developers lightning",
-            "Overdoing it in Python 200min", "Overdoing it in Python 180min", };
+            // 3 hours 20 min
+            "Overdoing it in Python 200min",
+            // 3 hours
+            "Overdoing it in Python 180min" };
     
     @Test
     public void shouldCreateConfWithTwoTracks()
@@ -116,11 +120,11 @@ public class ConferenceScheduleTest
         
         ITrack track = conference.track(0);
         assertNotNull(track);
-        assertEquals(2, track.numberOfSessions());
+        assertEquals(2, track.numberOfSessionWithTalks());
         
         track = conference.track(1);
         assertNotNull(track);
-        assertEquals(2, track.numberOfSessions());
+        assertEquals(1, track.numberOfSessionWithTalks());
     }
     
     static final String[] SAMPLE_PROPOSALS = {
@@ -157,11 +161,11 @@ public class ConferenceScheduleTest
         
         ITrack track = conference.track(0);
         assertNotNull(track);
-        assertEquals(2, track.numberOfSessions());
+        assertEquals(2, track.numberOfSessionWithTalks());
         
         track = conference.track(1);
         assertNotNull(track);
-        assertEquals(2, track.numberOfSessions());
+        assertEquals(2, track.numberOfSessionWithTalks());
     }
     
     static final String[] TOO_LONG_PROPOSALS = {
@@ -194,7 +198,7 @@ public class ConferenceScheduleTest
         
         ITrack track = conference.track(0);
         assertNotNull(track);
-        assertEquals(2, track.numberOfSessions());
+        assertEquals(2, track.numberOfSessionWithTalks());
         
         ISession morningSession = track.morningSession();
         assertEquals(1, morningSession.talkDetails().length);

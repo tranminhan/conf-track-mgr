@@ -7,7 +7,7 @@ public interface ITrack
     public static final LocalTime LUNCH_TIME = LocalTime.of(12, 0);
     public static final LocalTime EARLY_NETWORKING_START = LocalTime.of(16, 0);
     
-    int numberOfSessions();
+    int numberOfSessionWithTalks();
     
     String id();
     
