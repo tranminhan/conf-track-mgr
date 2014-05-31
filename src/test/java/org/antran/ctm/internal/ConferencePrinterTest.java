@@ -5,9 +5,9 @@ import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.assertTrue;
 
 import org.antran.ctm.api.ISession;
-import org.antran.ctm.api.ITalkDetail;
 import org.antran.ctm.api.ITrack;
 import org.antran.ctm.api.IConferencePrinter;
+import org.antran.ctm.api.TalkDetail;
 import org.junit.Test;
 
 public class ConferencePrinterTest
@@ -50,7 +50,7 @@ public class ConferencePrinterTest
     @Test
     public void shouldPrintTalkDetail()
     {
-        ITalkDetail talkDetail = new TalkDetail(TimeUtils.MORNING_START, "a title");
+        TalkDetail talkDetail = new TalkDetail(TimeUtils.MORNING_START, "a title");
         IConferencePrinter printer = new ConferencePrinter();
         
         String flyoutContent = printer.print(talkDetail);

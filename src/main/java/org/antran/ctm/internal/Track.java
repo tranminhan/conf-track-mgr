@@ -17,7 +17,7 @@ public class Track implements ITrack
     {
         this();
         this.id = id;
-        this.sessions = sessions;
+        this.sessions = sessions.clone();
     }
     
     public int numberOfSessions()

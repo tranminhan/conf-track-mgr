@@ -1,6 +1,5 @@
 package org.antran.ctm.api;
 
-
 public interface IConferencePrinter
 {
     
