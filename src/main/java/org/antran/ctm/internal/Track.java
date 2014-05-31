@@ -1,5 +1,7 @@
 package org.antran.ctm.internal;
 
+import java.time.LocalTime;
+
 import org.antran.ctm.api.ISession;
 import org.antran.ctm.api.ITrack;
 
@@ -30,8 +32,22 @@ public class Track implements ITrack
         return id;
     }
     
-    public ISession[] sessions()
+    public ISession afternoonSession()
     {
-        return sessions;
+        return sessions[1];
+    }
+    
+    public ISession morningSession()
+    {
+        return sessions[0];
+    }
+    
+    public LocalTime networkingStartTime()
+    {
+        if (afternoonSession().endTime().isBefore(EARLY_NETWORKING_START))
+        {
+            return EARLY_NETWORKING_START;
+        }
+        return afternoonSession().endTime();
     }
 }

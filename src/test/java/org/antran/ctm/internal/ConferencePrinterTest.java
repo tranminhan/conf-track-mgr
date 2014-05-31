@@ -88,6 +88,7 @@ public class ConferencePrinterTest
         
         // then
         assertTrue(flyoutContent.contains("Track 1:"));
+        assertTrue(flyoutContent.contains("4:00PM Networking Event"));
         assertTrue(flyoutContent.contains("Track 2:"));
     }
     

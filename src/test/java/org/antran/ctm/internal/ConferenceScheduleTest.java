@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import org.antran.ctm.api.IConference;
-import org.antran.ctm.api.IConferencePrinter;
 import org.antran.ctm.api.IConferenceScheduler;
 import org.antran.ctm.api.ISession;
 import org.antran.ctm.api.ITrack;
@@ -51,7 +50,7 @@ public class ConferenceScheduleTest
         
         ITrack track = conference.track(0);
         assertNotNull(track);
-        assertEquals(1, track.numberOfSessions());
+        assertEquals(2, track.numberOfSessions());
     }
     
     static final String[] ONE_TRACK_ONE_SESSION_TWO_PROPOSALS = {
@@ -71,9 +70,9 @@ public class ConferenceScheduleTest
         
         ITrack track = conference.track(0);
         assertNotNull(track);
-        assertEquals(1, track.numberOfSessions());
+        assertEquals(2, track.numberOfSessions());
         
-        ISession session = track.sessions()[0];
+        ISession session = track.morningSession();
         assertEquals(2, session.talkDetails().length);
     }
     
@@ -121,7 +120,7 @@ public class ConferenceScheduleTest
         
         track = conference.track(1);
         assertNotNull(track);
-        assertEquals(1, track.numberOfSessions());
+        assertEquals(2, track.numberOfSessions());
     }
     
     static final String[] SAMPLE_PROPOSALS = {
@@ -197,11 +196,11 @@ public class ConferenceScheduleTest
         assertNotNull(track);
         assertEquals(2, track.numberOfSessions());
         
-        ISession morningSession = track.sessions()[0];
+        ISession morningSession = track.morningSession();
         assertEquals(1, morningSession.talkDetails().length);
         assertEquals("Woah 30min", morningSession.talkDetails()[0].title());
         
-        ISession afternoonSession = track.sessions()[1];
+        ISession afternoonSession = track.afternoonSession();
         assertEquals(1, afternoonSession.talkDetails().length);
         assertEquals("Writing Fast Tests Against Enterprise Rails 200min", afternoonSession.talkDetails()[0].title());
     }

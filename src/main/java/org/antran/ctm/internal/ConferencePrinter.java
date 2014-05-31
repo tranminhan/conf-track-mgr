@@ -18,16 +18,12 @@ public class ConferencePrinter implements IConferencePrinter
         content.append("Track " + track.id() + ":");
         content.append(ENDLINE);
         
-        ISession[] sessions = track.sessions();
-        ISession morningSession = sessions[0];
-        ISession afterternoonSession = sessions[1];
-        
-        printSession(content, morningSession);
-        content.append(dateTimeFormatter.format(TimeUtils.LUNCH_TIME) + " " + "Lunch");
+        printSession(content, track.morningSession());
+        content.append(dateTimeFormatter.format(ITrack.LUNCH_TIME) + " " + "Lunch");
         content.append(ENDLINE);
         
-        printSession(content, afterternoonSession);
-        content.append(dateTimeFormatter.format(afterternoonSession.endTime()) + " " + "Networking Event");
+        printSession(content, track.afternoonSession());
+        content.append(dateTimeFormatter.format(track.networkingStartTime()) + " " + "Networking Event");
         content.append(ENDLINE);
         
         return content.toString();

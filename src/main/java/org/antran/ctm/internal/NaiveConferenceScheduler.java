@@ -39,12 +39,12 @@ public class NaiveConferenceScheduler implements IConferenceScheduler
             
             List<ITrack> tracks = new ArrayList<ITrack>();
             
-            int id = 0;
+            int trackId = 1;
             while (moreTalksToAssign(proposalTalks))
             {
-                ITrack track = assignTalksToTrack(id, proposalTalks);
+                ITrack track = assignTalksToTrack(trackId, proposalTalks);
                 tracks.add(track);
-                id++;
+                trackId++;
             }
             
             return new Conference(tracks);
@@ -103,11 +103,6 @@ public class NaiveConferenceScheduler implements IConferenceScheduler
             index++;
         }
         while (timeAllocation > 0 && index < proposalTalks.size());
-        
-        if (talks.isEmpty())
-        {
-            return null;
-        }
         
         return new Session(sessionStartTime, talks.toArray(new ITalk[0]));
     }
